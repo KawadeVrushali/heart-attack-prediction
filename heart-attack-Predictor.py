@@ -15,7 +15,7 @@ from sklearn.metrics import classification_report,accuracy_score,confusion_matri
 import warnings
 warnings.filterwarnings('ignore')
 import pickle
-df=pd.read_csv('C:/Users/GAIKAR/Desktop/main/heart-attack-Predictor/heart.csv')
+df=pd.read_csv('heart.csv')
 x=df.drop('target',axis=1)
 y=df['target']
 x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.25,random_state=20)
