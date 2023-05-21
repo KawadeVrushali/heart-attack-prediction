@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 import pickle
 import numpy as np
 
-filename = 'C:/Users/GAIKAR/Desktop/main/heart-attack-Predictor/heart_attack_model.pkl'
+filename = 'heart_attack_model.pkl'
 with open(filename, 'rb') as file:
     classifier = pickle.load(file)
 
