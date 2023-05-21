@@ -1,0 +1,37 @@
+from flask import Flask, render_template, request
+import pickle
+import numpy as np
+
+filename = 'C:/Users/GAIKAR/Desktop/main/heart-attack-Predictor/heart_attack_model.pkl'
+with open(filename, 'rb') as file:
+    classifier = pickle.load(file)
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+	return render_template('index.html')
+
+@app.route('/predict', methods=['POST'])
+def predict():
+    if request.method == 'POST':
+        age=int(request.form['age'])
+        sex=int(request.form['sex'])
+        cp=int(request.form['cp'])
+        trestbps=int(request.form['trestbps'])
+        chol=int(request.form['chol'])
+        fbs=int(request.form['fbs'])
+        restecg=int(request.form['restecg'])
+        thalach=int(request.form['thalach'])
+        exang=int(request.form['exang'])
+        oldpeak=int(request.form['oldpeak'])
+        slope=int(request.form['slope'])
+        ca=int(request.form['ca'])
+        thal=int(request.form['thal'])
+        
+        data = np.array([[age,sex,cp,trestbps,chol,fbs, restecg, thalach, exang,oldpeak,slope,ca,thal]])
+        my_prediction = classifier.predict(data)
+        return render_template('result.html', prediction=my_prediction)
+    
+if __name__ == '__main__':
+	app.run(debug=True)
